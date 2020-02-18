@@ -1,4 +1,4 @@
-SOURCES := main.c
+SOURCES := main.c FSM.c timer.c order.c
 
 SOURCE_DIR := source
 BUILD_DIR := build
