@@ -10,7 +10,6 @@
 
 #include <comedilib.h>
 
-
 static comedi_t *it_g = NULL;
 
 
@@ -69,3 +68,5 @@ int io_read_analog(int channel) {
 
     return (int)data;
 }
+
+

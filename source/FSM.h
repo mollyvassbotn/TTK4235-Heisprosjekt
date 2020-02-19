@@ -12,7 +12,8 @@ typedef enum{
     STOP
 } system_state;
 
-
+void fsm_open_door();
+void fsm_close_door();
 
 
 
@@ -20,3 +21,4 @@ typedef enum{
 
 
 #endif
+

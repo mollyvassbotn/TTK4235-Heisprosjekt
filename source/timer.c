@@ -1,21 +1,10 @@
 #include "timer.h"
 
-time_t start_time;
-time_t close_time = 3; 
 
-void start_timer(){
-    start_time = time(NULL);
-}
-
-
-int timer() {
-    time_t close_time=3;
-
-    start_time = time(NULL);
-
-    while(time(NULL) > close_time+ start_time) {
-        return 1;
+int timer(){
+    clock_t start_time = clock();
+    while((float)(clock()-start_time)/(CLOCKS_PER_SEC)<3){
     }
-    
-    return 0;
+    return 1;
 }
+

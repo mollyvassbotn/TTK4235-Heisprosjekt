@@ -3,9 +3,6 @@
 
 #include <time.h>
 
-void start_timer();
-
 int timer();
-
 
 #endif
