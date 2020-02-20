@@ -1,9 +1,11 @@
 #include "timer.h"
 
+clock_t start_time;
 
 int timer(){
-    clock_t start_time = clock();
+    start_time = clock();
     while((float)(clock()-start_time)/(CLOCKS_PER_SEC)<3){
+        add_order();
     }
     return 1;
 }
