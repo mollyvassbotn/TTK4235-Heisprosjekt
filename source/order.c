@@ -1,11 +1,15 @@
 #include "order.h"
 
-
-int orders[12] = {0};
+void orders_init() {
+    for(int order=0; order<12; order++){
+        g_orders[order] = 0;
+    }
+}
 
 int check_if_order() {
     for (int i=0; i<12; i++) {
-        if (orders[i]) {
+        if (g_orders[i]) {
+            g_current_order =i; 
             return 1;
         } 
     }
@@ -15,27 +19,17 @@ int check_if_order() {
 
 void add_order(){
     for(int order=0; order<12; order++){
-        orders[order] = hardware_read_order(order%4, order/4);
+        if(hardware_read_order(order%4, order/4)){
+            g_orders[order] = 1;
+            hardware_command_order_light(order%4, order/4,1);
+        }
     }
 }
 
-void try_elevator(){
-    while(1){
-        add_order();
-        if(check_if_order()){
-            hardware_command_movement(HARDWARE_MOVEMENT_UP);
-        }
-        if(hardware_read_stop_signal()){
-            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-            break;
-        }
 
-    }
-}
-
-int order_same_floor(){
-    for(int floor=0; floor<3; floor++){
-        if(hardware_read_floor_sensor(floor) && hardware_read_order(floor,3)) {
+int order_same_floor(int floor){
+    for(int i=0; i<3; i++){
+        if(hardware_read_floor_sensor(floor) && hardware_read_order(floor,i)) {
             return 1;
         }
     }
@@ -45,14 +39,19 @@ int order_same_floor(){
 void delete_order_at_floor(int current_floor) {
     if(hardware_read_floor_sensor(current_floor)){
         for(int i=0; i<3; i++){
-        orders[current_floor +4*i]=0;
+            g_orders[current_floor +4*i]=0;
+            hardware_command_order_light(current_floor, i,0);
         }
     }
 }
 
+int get_order_floor(){
+    return g_current_order %4;
+}
+
 void delete_all_orders(){
     for(int i=0; i<12; i++){
-        orders[i] =0;
+        g_orders[i] =0;
     }
 } 
 
@@ -62,41 +61,15 @@ void reset_lights(){
     }
 }
 
- void queue_system(){
-     reset_lights();
-     while(1){
-        add_order();
-        for(int order =0; order<12; order ++){
-            if(orders[order]){
-                hardware_command_order_light(order%4, order/4,1);
-            }
-        }
-        for(int floor=0; floor<4; floor++){
-            if(hardware_read_floor_sensor(floor)){
-                hardware_command_door_open(1);
-                if(timer()){
-                    hardware_command_door_open(0);
-                }
-            }
-        }
-        // if(hardware_read_floor_sensor(2)){
-        //     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-        // }
-        // if(hardware_read_floor_sensor(1)){
-        //     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-        // }
-        if(orders[0] || orders[1] || orders[2]){
-            hardware_command_movement(HARDWARE_MOVEMENT_UP);
-        }
-        if(orders[9] || orders[10] || orders[11]){
-            hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-        }
-        if(orders[4] || orders[5] || orders[6] || orders[7]){
-            hardware_command_door_open(1);
-        }
-        if(hardware_read_stop_signal()){
-            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-            break;
-        }
+void get_current_floor(){
+     for(int i=0; i<4; i++){
+         if(hardware_read_floor_sensor(i)){
+             g_current_floor=i;
+         }
      }
  }
+
+void order_system(){
+
+}
+

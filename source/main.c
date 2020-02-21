@@ -3,6 +3,7 @@
 #include <signal.h>
 #include "hardware.h"
 #include "order.h"
+#include "FSM.h"
 
 
 
@@ -35,8 +36,15 @@ int main(){
         fprintf(stderr, "Unable to initialize hardware\n");
         exit(1);
     }
+    delete_all_orders();
+    orders_init();
+    init_fsm();
+    reset_lights();
 
-    queue_system();
+    add_order();
+    get_current_floor();
+    run_fsm();
+
 
     // signal(SIGINT, sigint_handler);
 

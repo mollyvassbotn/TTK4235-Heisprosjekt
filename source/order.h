@@ -5,7 +5,16 @@
 #include <stdio.h>
 
 
+//int g_orders[12] = {0};
+int g_orders[12];
+int g_current_floor;
+int g_current_order;
+
+void orders_init();
+
 int check_if_order();
+
+int order_same_floor(int floor);
 
 void add_order();
 
@@ -17,10 +26,13 @@ void delete_all_orders();
 
 void try_elevator();
 
-void queue_system();
-
+int get_order_floor();
 
 void reset_lights();
+
+void get_current_floor();
+
+void delete_order_at_floor(int current_floor);
 
 #endif
 
