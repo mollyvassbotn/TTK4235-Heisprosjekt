@@ -43,6 +43,7 @@ int main(){
 
     add_order();
     get_current_floor();
+    g_current_state = INIT;
     run_fsm();
 
 

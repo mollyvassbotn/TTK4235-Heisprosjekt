@@ -24,13 +24,11 @@ void delete_order(HardwareMovement type, int floor);
 
 void delete_all_orders();
 
-void try_elevator();
-
 int get_order_floor();
 
 void reset_lights();
 
-void get_current_floor();
+int get_current_floor();
 
 void delete_order_at_floor(int current_floor);
 

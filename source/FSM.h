@@ -14,11 +14,15 @@ typedef enum{
     STOP
 } system_state;
 
+system_state g_current_state;
+
+system_state g_prev_state;
+
 void fsm_open_door();
 
 void fsm_close_door();
 
-void fsm_order_handler();
+void fsm_idle();
 
 void init_fsm();
 
@@ -27,6 +31,8 @@ void fsm_moving_down();
 void fsm_moving_up();
 
 void fsm_doors_open();
+
+void next_order();
 
 void run_fsm();
 
