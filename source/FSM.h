@@ -14,6 +14,11 @@ typedef enum{
     STOP
 } system_state;
 
+typedef struct{
+    int floor;
+    int above;
+} Position;
+
 system_state g_current_state;
 
 system_state g_prev_state;

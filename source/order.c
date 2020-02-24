@@ -52,6 +52,7 @@ int get_order_floor(){
 void delete_all_orders(){
     for(int i=0; i<12; i++){
         g_orders[i] =0;
+        reset_lights();
     }
 } 
 

@@ -81,10 +81,40 @@ void fsm_moving_up(){
 }
 
 void fsm_doors_open(){
+    // if(hardware_read_obstruction_signal()){
+    //     hardware_command_door_open(1);
+    //     if(!hardware_read_obstruction_signal()){
+    //         if(timer()){
+    //             hardware_command_door_open(0);
+    //             next_order();
+    //         }
+    //     }
+    // }
     hardware_command_door_open(1);
     if(timer()){
         hardware_command_door_open(0);
         next_order();
+    }
+}
+
+void fsm_stop(){
+    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+    while(hardware_read_stop_signal()){
+        hardware_command_stop_light(1);
+        delete_all_orders();
+    }
+    for(int i=0; i<3; i++){
+        if(!(hardware_read_floor_sensor(i))){
+            if(!(hardware_read_stop_signal())){
+                hardware_command_stop_light(0);
+                g_current_state=IDLE;
+            }
+        }
+        if(hardware_read_floor_sensor(i)){
+            if(!(hardware_read_stop_signal())){
+                g_current_state = DOORS_OPEN;
+            }
+        }
     }
 }
 
@@ -175,12 +205,12 @@ void run_fsm() {
         add_order();
         get_current_floor();
         if(hardware_read_stop_signal()){
-        hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-        break;
+            g_current_state=STOP;
     }
         switch (g_current_state) {
             case INIT:
                 init_fsm();
+                break;
             case IDLE:
                 fsm_idle();
                 break;
@@ -193,9 +223,8 @@ void run_fsm() {
             case MOVING_UP:
                 fsm_moving_up();
                 break;
-
             case STOP:
-
+                fsm_stop();
                 break;
         }
     }
