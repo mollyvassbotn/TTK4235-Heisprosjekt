@@ -12,15 +12,15 @@ int main(){
         fprintf(stderr, "Unable to initialize hardware\n");
         exit(1);
     }
-    delete_all_orders();
-    orders_init();
-    init_fsm();
-    reset_lights();
+    order_delete_all_orders();
+    order_init();
+    fsm_init();
+    order_reset_lights();
 
-    add_order();
-    get_current_floor();
+    order_add_order();
+    order_get_current_floor();
     g_current_state = INIT;
-    run_fsm();
+    fsm_run();
 
     return 0;
 }
