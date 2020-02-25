@@ -24,6 +24,8 @@ typedef struct{
     int above;
 } Position;
 
+int g_between_floors;
+
 system_state g_current_state;
 
 system_state g_prev_state;
@@ -81,7 +83,7 @@ void fsm_stop();
  * @brief Queue system for the elevator. Priorities the orders, based on the
  * previous direction.
  */
-void next_order();
+void fsm_next_order();
 
 
 /**
