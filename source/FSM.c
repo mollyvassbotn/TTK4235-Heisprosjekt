@@ -1,6 +1,6 @@
 #include "FSM.h"
 
-
+/*
 // åpner dør
 void fsm_open_door(){
     hardware_command_door_open(1);
@@ -10,6 +10,7 @@ void fsm_open_door(){
 void fsm_close_door(){
     hardware_command_door_open(0);
 }
+*/
 
 void init_fsm(){
     hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
@@ -42,6 +43,7 @@ void fsm_idle() {
     } 
 }
 
+
 void fsm_moving_down(){
     hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
     g_prev_state = MOVING_DOWN;
@@ -60,6 +62,7 @@ void fsm_moving_down(){
         }
     }
 }
+
 
 void fsm_moving_up(){
     hardware_command_movement(HARDWARE_MOVEMENT_UP);
@@ -80,6 +83,7 @@ void fsm_moving_up(){
     }
 }
 
+
 void fsm_doors_open(){
     // if(hardware_read_obstruction_signal()){
     //     hardware_command_door_open(1);
@@ -96,6 +100,7 @@ void fsm_doors_open(){
         next_order();
     }
 }
+
 
 void fsm_stop(){
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
@@ -117,6 +122,7 @@ void fsm_stop(){
         }
     }
 }
+
 
 void next_order(){
     if(hardware_read_floor_sensor(3)){
@@ -199,6 +205,7 @@ void next_order(){
         }
     }
 }
+
 
 void run_fsm() {
     while(1){
