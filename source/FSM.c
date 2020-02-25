@@ -21,13 +21,15 @@ void fsm_idle() {
         g_current_state =IDLE;
     }
     else if(order_same_floor(g_current_floor)){
+        order_delete_order_at_floor(order_get_order_floor());
         g_current_state=DOORS_OPEN;
+        
     }
     else if(order_check_if_order()){
         if((order_get_order_floor() < g_current_floor) || ((order_get_order_floor() <= g_current_floor) &&(g_between_floors == 1))){
             g_current_state = MOVING_DOWN;
         }
-        else{ //if((get_order_floor()> g_current_floor) || (hardware_read_floor_sensor(g_current_floor) && (g_between_floors ==-1))){
+        else{ 
             g_current_state=MOVING_UP;
         }
     } 
@@ -129,8 +131,8 @@ void fsm_next_order(){
                 }
             }
         }
-
     }
+
     else if(g_prev_state ==MOVING_DOWN){
         for(int i=0; i< order_get_current_floor(); i++){
             for(int j=0; j<3; j++){
@@ -174,16 +176,14 @@ void fsm_run() {
     while(1){
         fsm_update_position();
         order_add_order();
-        //get_current_floor();
+       
         if(hardware_read_stop_signal()){
             g_current_state=STOP;
         }
         if(hardware_read_obstruction_signal() && hardware_read_floor_sensor(g_current_order)){
             g_current_state =DOORS_OPEN;
         }
-        // if(hardware_read_obstruction_signal()){
-        //     break;
-        // }
+    
         switch (g_current_state) {
             case INIT:
             fsm_init();
