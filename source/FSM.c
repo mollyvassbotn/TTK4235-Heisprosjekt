@@ -77,10 +77,6 @@ void fsm_moving_up(){
 void fsm_doors_open(){
     g_between_floors =0;
     hardware_command_door_open(1);
-    // while (hardware_read_obstruction_signal()) {
-    //    hardware_command_door_open(1);
-    //    add_order();
-    // }
     if(timer()){
         hardware_command_door_open(0);
         fsm_next_order();
