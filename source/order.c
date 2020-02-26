@@ -29,7 +29,7 @@ void order_add_order(){
 
 int order_same_floor(int floor){
     for(int i=0; i<3; i++){
-        if(hardware_read_floor_sensor(floor) && hardware_read_order(floor,i)) {
+        if(hardware_read_floor_sensor(floor) && g_orders[floor + 4*i]) {
             return 1;
         }
     }
@@ -53,7 +53,7 @@ int order_get_order_floor(){
 void order_delete_all_orders(){
     for(int i=0; i<12; i++){
         g_orders[i] =0;
-        order_reset_lights(); // denne het reset_lights?
+        order_reset_lights(); 
     }
 } 
 

@@ -4,7 +4,7 @@
 
 #include <stdlib.h>
 
-//sjekker etasje
+
 static int hardware_legal_floor(int floor, HardwareOrder order_type){
     int lower_floor = 0;
     int upper_floor = HARDWARE_NUMBER_OF_FLOORS - 1;
@@ -24,7 +24,7 @@ static int hardware_legal_floor(int floor, HardwareOrder order_type){
     return 1;
 }
 
-// setter retningsbit
+
 static int hardware_order_type_bit(HardwareOrder order_type){
     int type_bit;
 
@@ -69,7 +69,7 @@ int hardware_init(){
     return 0;
 }
 
-// driver heisen
+
 void hardware_command_movement(HardwareMovement movement){
     switch(movement){
         case HARDWARE_MOVEMENT_UP:

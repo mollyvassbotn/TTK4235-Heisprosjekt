@@ -1,5 +1,12 @@
 #include "FSM.h"
 
+
+// void fsm_reset_floor_indicators() {
+//     for (int i=0; i<4; i++) {
+//         hardware_command_floor_indicator_on(0);
+//     }
+// }
+
 void fsm_init(){
     hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
     while(g_current_state !=IDLE){
@@ -21,7 +28,7 @@ void fsm_idle() {
         g_current_state =IDLE;
     }
     else if(order_same_floor(g_current_floor)){
-        order_delete_order_at_floor(order_get_order_floor());
+        //order_delete_order_at_floor(order_get_order_floor());
         g_current_state=DOORS_OPEN;
         
     }
@@ -41,14 +48,14 @@ void fsm_moving_down(){
     g_prev_state = MOVING_DOWN;
     if(hardware_read_floor_sensor(order_get_order_floor())){
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-        order_delete_order_at_floor(order_get_order_floor());
+        //order_delete_order_at_floor(order_get_order_floor());
         g_current_state =DOORS_OPEN; 
     }
     else if((g_orders[4] ||g_orders[5] ||g_orders[6] ||g_orders[7] ||g_orders[8] ||g_orders[9] ||g_orders[10] ||g_orders[11])){
         for(int i=4; i<8;i++){
             if((g_orders[i] && hardware_read_floor_sensor(i%4))|| (g_orders[i+4] && hardware_read_floor_sensor((i+4)%4))){
                 hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-                order_delete_order_at_floor(g_current_floor);
+                //order_delete_order_at_floor(g_current_floor);
                 g_current_state=DOORS_OPEN;
             }
         }
@@ -61,14 +68,14 @@ void fsm_moving_up(){
     g_prev_state = MOVING_UP;
     if(hardware_read_floor_sensor(order_get_order_floor())){
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-        order_delete_order_at_floor(order_get_order_floor());
+        //order_delete_order_at_floor(order_get_order_floor());
         g_current_state= DOORS_OPEN;
     }
     else if((g_orders[0] ||g_orders[1] ||g_orders[2] ||g_orders[3] ||g_orders[4] ||g_orders[5] ||g_orders[6] ||g_orders[7]) ){
         for(int i=0; i<4;i++ ){
             if((g_orders[i]&& hardware_read_floor_sensor(i%4)) || (g_orders[i+4] && hardware_read_floor_sensor((i+4)%4))){
                 hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-                order_delete_order_at_floor(g_current_floor);
+                //order_delete_order_at_floor(g_current_floor);
                 g_current_state=DOORS_OPEN;
             }
         }
@@ -77,6 +84,7 @@ void fsm_moving_up(){
 
 
 void fsm_doors_open(){
+    order_delete_order_at_floor(g_current_floor);
     g_between_floors =0;
     hardware_command_door_open(1);
     if(timer()){
@@ -180,9 +188,9 @@ void fsm_run() {
         if(hardware_read_stop_signal()){
             g_current_state=STOP;
         }
-        if(hardware_read_obstruction_signal() && hardware_read_floor_sensor(g_current_order)){
-            g_current_state =DOORS_OPEN;
-        }
+        // if(hardware_read_obstruction_signal() && hardware_read_floor_sensor(g_current_order)){
+        //     g_current_state =DOORS_OPEN;
+        // }
     
         switch (g_current_state) {
             case INIT:
