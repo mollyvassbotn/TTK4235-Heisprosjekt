@@ -5,7 +5,6 @@ digraph "source/FSM.h"
   Node0 [label="source/FSM.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
   Node0 -> Node1 [color="midnightblue",fontsize="10",style="solid"];
   Node1 [label="order.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$order_8h.html",tooltip="Deals with the orders. "];
-  Node1 -> Node0 [color="midnightblue",fontsize="10",style="solid"];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
   Node2 [label="hardware.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$hardware_8h.html",tooltip="Driver for the elevator hardware. "];
   Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
