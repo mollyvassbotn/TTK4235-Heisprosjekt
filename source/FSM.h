@@ -11,6 +11,9 @@
 #include "timer.h"
 #include "hardware.h"
 
+/**
+ * @brief The different states the elevator can be in
+ */
 typedef enum{
     INIT,
     IDLE,
@@ -20,10 +23,6 @@ typedef enum{
     STOP
 } system_state;
 
-typedef struct{
-    int floor;
-    int above;
-} Position;
 
 int g_between_floors;
 
@@ -39,36 +38,37 @@ void fsm_init();
 
 
 /**
- * @brief Checks if there are any orders, and sets current state.
+ * @brief Checks if there are any orders, sets the next state. 
  */
 void fsm_idle();
 
 
 /**
- * @brief Sets the elevator direction downwards, and stops at the ordered floors in
- * the same direction. The orders will be deleted after they are done.
+ * @brief Sets the elevator direction downwards. If it is an order in the same direction as the 
+ * current order it will stop there, otherwise it will stop at the floor of the current order. 
  */
 void fsm_moving_down();
 
 
 /**
- * @brief Sets the elevator direction upwards, and stops at the ordered floors in
- * the same direction. The orders will be deleted after they are done.
+ * @brief Sets the elevator direction upwards. If it is an order in the same direction as the 
+ * current order it will stop there, otherwise it will stop at the floor of the current order. 
  */
 void fsm_moving_up();
 
 
 /**
- * @brief Opens the door, and keeps it open for 3 seconds. If the obstuction signal
+ * @brief Deletes the orders at the current floor. Opens the door, and keeps it open for 3 seconds. If the obstuction signal
  * is active, the door will open as long as it is active. Then it will close after
- * 3 seconds. -> OBSTRUCTION????
+ * 3 seconds. As long as the stop button is pushed the stop light will be on, and if the elevator is at a floor the 
+ * doors will open as long as stop is active and will close 3 seconds after the button is released. 
  */
 void fsm_doors_open();
 
 
 /**
  * @brief Stops the elevator immidiately. If the stop button is pushed, all orders
- * will be deleted. If the elevator is at a floor as the stop button is pushed, the
+ * will be deleted, and the stop light will be on. If the elevator is at a floor as the stop button is pushed, the
  * doors will open.
  */
 void fsm_stop();
@@ -82,14 +82,14 @@ void fsm_next_order();
 
 
 /**
- * @brief Updates the position (defines whether the elevator is above, below or at
- *  a floor) and sets the floor lights. -> SETTER DEN LYS?
+ * @brief Updates the position, defines whether the elevator is above, below or at
+ *  a floor, and sets the floor indicators. 
  */
 void fsm_update_position();
 
 
 /**
- * @brief Updates orders and current floor. Sets the elevator state.
+ * @brief Updates orders and current floor. Let the elevator switch between different states. 
  */
 void fsm_run();
 

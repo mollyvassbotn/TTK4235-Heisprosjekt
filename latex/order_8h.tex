@@ -1,0 +1,157 @@
+\hypertarget{order_8h}{}\section{source/order.h File Reference}
+\label{order_8h}\index{source/order.\+h@{source/order.\+h}}
+
+
+Deals with the orders.  
+
+
+{\ttfamily \#include \char`\"{}F\+S\+M.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hardware.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+Include dependency graph for order.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{order_8h_a2794dde9ab65dbb944a6048b3ba75d8c}\label{order_8h_a2794dde9ab65dbb944a6048b3ba75d8c}} 
+\#define {\bfseries N\+\_\+\+O\+R\+D\+E\+RS}~12
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{order_8h_a2ee7a94a697f961a343b51889d80d807}\label{order_8h_a2ee7a94a697f961a343b51889d80d807}} 
+void \hyperlink{order_8h_a2ee7a94a697f961a343b51889d80d807}{order\+\_\+init} ()
+\begin{DoxyCompactList}\small\item\em Initializes the order array. \end{DoxyCompactList}\item 
+int \hyperlink{order_8h_a27b25d7a50cf4719aacd0c7ff9203762}{order\+\_\+check\+\_\+if\+\_\+order} ()
+\begin{DoxyCompactList}\small\item\em Checks if there are any orders, and sets the current order. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{order_8h_a1981967e4e27108fe737127e131a6d9c}\label{order_8h_a1981967e4e27108fe737127e131a6d9c}} 
+void \hyperlink{order_8h_a1981967e4e27108fe737127e131a6d9c}{order\+\_\+add\+\_\+order} ()
+\begin{DoxyCompactList}\small\item\em Adds new orders, and sets the order lights. \end{DoxyCompactList}\item 
+int \hyperlink{order_8h_abbbeeb0a92e101fea99209fbd63a2bf1}{order\+\_\+same\+\_\+floor} (int current\+\_\+floor)
+\begin{DoxyCompactList}\small\item\em Checks if there are any more orders at the current floor. \end{DoxyCompactList}\item 
+void \hyperlink{order_8h_a010887063ba368e30b3ae890c0d9b9e6}{order\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor} (int current\+\_\+floor)
+\begin{DoxyCompactList}\small\item\em Deletes all orders at the current floor, and turns the order lights off. \end{DoxyCompactList}\item 
+int \hyperlink{order_8h_a67f0177cf5e32114d2190e2cc705b758}{order\+\_\+get\+\_\+order\+\_\+floor} ()
+\begin{DoxyCompactList}\small\item\em Calculates the destination floor for the current order. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{order_8h_a36d4d87312760f478ad74b0bfd918232}\label{order_8h_a36d4d87312760f478ad74b0bfd918232}} 
+void \hyperlink{order_8h_a36d4d87312760f478ad74b0bfd918232}{order\+\_\+delete\+\_\+all\+\_\+orders} ()
+\begin{DoxyCompactList}\small\item\em Deletes all orders, and resets the order lights. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{order_8h_a4c842871f96eb965cb36fac56e1b85f0}\label{order_8h_a4c842871f96eb965cb36fac56e1b85f0}} 
+void \hyperlink{order_8h_a4c842871f96eb965cb36fac56e1b85f0}{order\+\_\+reset\+\_\+lights} ()
+\begin{DoxyCompactList}\small\item\em Resets the order lights. \end{DoxyCompactList}\item 
+int \hyperlink{order_8h_a0edf40961e35fc501b3fcafceced3d20}{order\+\_\+get\+\_\+current\+\_\+floor} ()
+\begin{DoxyCompactList}\small\item\em Sets the current floor based on the hardware sensors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{order_8h_af75754dddc678e1b5dd3e3b8ffc5fa34}\label{order_8h_af75754dddc678e1b5dd3e3b8ffc5fa34}} 
+int \hyperlink{order_8h_af75754dddc678e1b5dd3e3b8ffc5fa34}{g\+\_\+orders} \mbox{[}N\+\_\+\+O\+R\+D\+E\+RS\mbox{]}
+\begin{DoxyCompactList}\small\item\em An array where all the orders from the elevator is stored. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{order_8h_a128ab70c77672ac0c3f503bfd2fcc1e4}\label{order_8h_a128ab70c77672ac0c3f503bfd2fcc1e4}} 
+int \hyperlink{order_8h_a128ab70c77672ac0c3f503bfd2fcc1e4}{g\+\_\+current\+\_\+floor}
+\begin{DoxyCompactList}\small\item\em Cointains which floor the elevator is currently at. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{order_8h_afd5ddf6dde76cf164e7f0b403add0ce7}\label{order_8h_afd5ddf6dde76cf164e7f0b403add0ce7}} 
+int \hyperlink{order_8h_afd5ddf6dde76cf164e7f0b403add0ce7}{g\+\_\+current\+\_\+order}
+\begin{DoxyCompactList}\small\item\em Contains the order the elevator will execute. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Deals with the orders. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{order_8h_a27b25d7a50cf4719aacd0c7ff9203762}\label{order_8h_a27b25d7a50cf4719aacd0c7ff9203762}} 
+\index{order.\+h@{order.\+h}!order\+\_\+check\+\_\+if\+\_\+order@{order\+\_\+check\+\_\+if\+\_\+order}}
+\index{order\+\_\+check\+\_\+if\+\_\+order@{order\+\_\+check\+\_\+if\+\_\+order}!order.\+h@{order.\+h}}
+\subsubsection{\texorpdfstring{order\+\_\+check\+\_\+if\+\_\+order()}{order\_check\_if\_order()}}
+{\footnotesize\ttfamily int order\+\_\+check\+\_\+if\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Checks if there are any orders, and sets the current order. 
+
+\begin{DoxyReturn}{Returns}
+1 if there are any orders, 0 otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 9 of file order.\+c.
+
+\mbox{\Hypertarget{order_8h_a010887063ba368e30b3ae890c0d9b9e6}\label{order_8h_a010887063ba368e30b3ae890c0d9b9e6}} 
+\index{order.\+h@{order.\+h}!order\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor@{order\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor}}
+\index{order\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor@{order\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor}!order.\+h@{order.\+h}}
+\subsubsection{\texorpdfstring{order\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor()}{order\_delete\_order\_at\_floor()}}
+{\footnotesize\ttfamily void order\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor (\begin{DoxyParamCaption}\item[{int}]{current\+\_\+floor }\end{DoxyParamCaption})}
+
+
+
+Deletes all orders at the current floor, and turns the order lights off. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em current\+\_\+floor} & The floor the elevator is currently at. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 40 of file order.\+c.
+
+\mbox{\Hypertarget{order_8h_a0edf40961e35fc501b3fcafceced3d20}\label{order_8h_a0edf40961e35fc501b3fcafceced3d20}} 
+\index{order.\+h@{order.\+h}!order\+\_\+get\+\_\+current\+\_\+floor@{order\+\_\+get\+\_\+current\+\_\+floor}}
+\index{order\+\_\+get\+\_\+current\+\_\+floor@{order\+\_\+get\+\_\+current\+\_\+floor}!order.\+h@{order.\+h}}
+\subsubsection{\texorpdfstring{order\+\_\+get\+\_\+current\+\_\+floor()}{order\_get\_current\_floor()}}
+{\footnotesize\ttfamily int order\+\_\+get\+\_\+current\+\_\+floor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sets the current floor based on the hardware sensors. 
+
+\begin{DoxyReturn}{Returns}
+g\+\_\+current\+\_\+floor The floor the elevator is currently at. 
+\end{DoxyReturn}
+
+
+Definition at line 66 of file order.\+c.
+
+\mbox{\Hypertarget{order_8h_a67f0177cf5e32114d2190e2cc705b758}\label{order_8h_a67f0177cf5e32114d2190e2cc705b758}} 
+\index{order.\+h@{order.\+h}!order\+\_\+get\+\_\+order\+\_\+floor@{order\+\_\+get\+\_\+order\+\_\+floor}}
+\index{order\+\_\+get\+\_\+order\+\_\+floor@{order\+\_\+get\+\_\+order\+\_\+floor}!order.\+h@{order.\+h}}
+\subsubsection{\texorpdfstring{order\+\_\+get\+\_\+order\+\_\+floor()}{order\_get\_order\_floor()}}
+{\footnotesize\ttfamily int order\+\_\+get\+\_\+order\+\_\+floor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Calculates the destination floor for the current order. 
+
+\begin{DoxyReturn}{Returns}
+The floor the current order is at. 
+\end{DoxyReturn}
+
+
+Definition at line 49 of file order.\+c.
+
+\mbox{\Hypertarget{order_8h_abbbeeb0a92e101fea99209fbd63a2bf1}\label{order_8h_abbbeeb0a92e101fea99209fbd63a2bf1}} 
+\index{order.\+h@{order.\+h}!order\+\_\+same\+\_\+floor@{order\+\_\+same\+\_\+floor}}
+\index{order\+\_\+same\+\_\+floor@{order\+\_\+same\+\_\+floor}!order.\+h@{order.\+h}}
+\subsubsection{\texorpdfstring{order\+\_\+same\+\_\+floor()}{order\_same\_floor()}}
+{\footnotesize\ttfamily int order\+\_\+same\+\_\+floor (\begin{DoxyParamCaption}\item[{int}]{current\+\_\+floor }\end{DoxyParamCaption})}
+
+
+
+Checks if there are any more orders at the current floor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em floor} & The floor the elevator is currently at.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if it is any more orders at the current floor, otherwise 0. 
+\end{DoxyReturn}
+
+
+Definition at line 30 of file order.\+c.
+

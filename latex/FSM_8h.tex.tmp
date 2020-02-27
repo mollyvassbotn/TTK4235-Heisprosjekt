@@ -1,0 +1,75 @@
+\hypertarget{FSM_8h}{}\section{source/\+F\+SM.h File Reference}
+\label{FSM_8h}\index{source/\+F\+S\+M.\+h@{source/\+F\+S\+M.\+h}}
+
+
+Finite state machine. Chooses the next state for the elevator.  
+
+
+{\ttfamily \#include \char`\"{}order.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}timer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hardware.\+h\char`\"{}}\newline
+Include dependency graph for F\+S\+M.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{FSM_8h_af9298353b81a0dc42f702b4dc896e489}\label{FSM_8h_af9298353b81a0dc42f702b4dc896e489}} 
+enum \hyperlink{FSM_8h_af9298353b81a0dc42f702b4dc896e489}{system\+\_\+state} \{ \newline
+{\bfseries I\+N\+IT}, 
+{\bfseries I\+D\+LE}, 
+{\bfseries M\+O\+V\+I\+N\+G\+\_\+\+UP}, 
+{\bfseries M\+O\+V\+I\+N\+G\+\_\+\+D\+O\+WN}, 
+\newline
+{\bfseries D\+O\+O\+R\+S\+\_\+\+O\+P\+EN}, 
+{\bfseries S\+T\+OP}
+ \}\begin{DoxyCompactList}\small\item\em The different states the elevator can be in. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{FSM_8h_a6d28dcad43166c03b061f129a8759018}\label{FSM_8h_a6d28dcad43166c03b061f129a8759018}} 
+void \hyperlink{FSM_8h_a6d28dcad43166c03b061f129a8759018}{fsm\+\_\+init} ()
+\begin{DoxyCompactList}\small\item\em Defines a state for the elevator. Updates current floor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{FSM_8h_a0cc425408925d49191639b96fb397981}\label{FSM_8h_a0cc425408925d49191639b96fb397981}} 
+void \hyperlink{FSM_8h_a0cc425408925d49191639b96fb397981}{fsm\+\_\+idle} ()
+\begin{DoxyCompactList}\small\item\em Checks if there are any orders, sets the next state. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{FSM_8h_ac99ecf1201a9f07b6f6d74f1aa7b784c}\label{FSM_8h_ac99ecf1201a9f07b6f6d74f1aa7b784c}} 
+void \hyperlink{FSM_8h_ac99ecf1201a9f07b6f6d74f1aa7b784c}{fsm\+\_\+moving\+\_\+down} ()
+\begin{DoxyCompactList}\small\item\em Sets the elevator direction downwards. If it is an order in the same direction as the current order it will stop there, otherwise it will stop at the floor of the current order. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{FSM_8h_a12c75de7006a8332728273664fb4875f}\label{FSM_8h_a12c75de7006a8332728273664fb4875f}} 
+void \hyperlink{FSM_8h_a12c75de7006a8332728273664fb4875f}{fsm\+\_\+moving\+\_\+up} ()
+\begin{DoxyCompactList}\small\item\em Sets the elevator direction upwards. If it is an order in the same direction as the current order it will stop there, otherwise it will stop at the floor of the current order. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{FSM_8h_a56260be0ca30214ac0fc12fe37ffcbeb}\label{FSM_8h_a56260be0ca30214ac0fc12fe37ffcbeb}} 
+void \hyperlink{FSM_8h_a56260be0ca30214ac0fc12fe37ffcbeb}{fsm\+\_\+doors\+\_\+open} ()
+\begin{DoxyCompactList}\small\item\em Deletes the orders at the current floor. Opens the door, and keeps it open for 3 seconds. If the obstuction signal is active, the door will open as long as it is active. Then it will close after 3 seconds. As long as the stop button is pushed the stop light will be on, and if the elevator is at a floor the doors will open as long as stop is active and will close 3 seconds after the button is released. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{FSM_8h_a6ebf955cf96db409422aad436b3a4bb7}\label{FSM_8h_a6ebf955cf96db409422aad436b3a4bb7}} 
+void \hyperlink{FSM_8h_a6ebf955cf96db409422aad436b3a4bb7}{fsm\+\_\+stop} ()
+\begin{DoxyCompactList}\small\item\em Stops the elevator immidiately. If the stop button is pushed, all orders will be deleted, and the stop light will be on. If the elevator is at a floor as the stop button is pushed, the doors will open. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{FSM_8h_a74c3627411350e19559268e0c4af5752}\label{FSM_8h_a74c3627411350e19559268e0c4af5752}} 
+void \hyperlink{FSM_8h_a74c3627411350e19559268e0c4af5752}{fsm\+\_\+next\+\_\+order} ()
+\begin{DoxyCompactList}\small\item\em Queue system for the elevator. Priorities the orders, based on the previous direction. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{FSM_8h_ac64982f1797f22a589bd6fa9017369a6}\label{FSM_8h_ac64982f1797f22a589bd6fa9017369a6}} 
+void \hyperlink{FSM_8h_ac64982f1797f22a589bd6fa9017369a6}{fsm\+\_\+update\+\_\+position} ()
+\begin{DoxyCompactList}\small\item\em Updates the position, defines whether the elevator is above, below or at a floor, and sets the floor indicators. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{FSM_8h_ae40f1570ae9205565011ed1219101a53}\label{FSM_8h_ae40f1570ae9205565011ed1219101a53}} 
+void \hyperlink{FSM_8h_ae40f1570ae9205565011ed1219101a53}{fsm\+\_\+run} ()
+\begin{DoxyCompactList}\small\item\em Updates orders and current floor. Let the elevator switch between different states. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{FSM_8h_a0b67b9968ae845af5325952f87f1298e}\label{FSM_8h_a0b67b9968ae845af5325952f87f1298e}} 
+int {\bfseries g\+\_\+between\+\_\+floors}
+\item 
+\mbox{\Hypertarget{FSM_8h_aa1e8fcdd42c4898312cb345553654b25}\label{FSM_8h_aa1e8fcdd42c4898312cb345553654b25}} 
+\hyperlink{FSM_8h_af9298353b81a0dc42f702b4dc896e489}{system\+\_\+state} {\bfseries g\+\_\+current\+\_\+state}
+\item 
+\mbox{\Hypertarget{FSM_8h_aa83e4d91b0e557555d65bc15264fcdfb}\label{FSM_8h_aa83e4d91b0e557555d65bc15264fcdfb}} 
+\hyperlink{FSM_8h_af9298353b81a0dc42f702b4dc896e489}{system\+\_\+state} {\bfseries g\+\_\+prev\+\_\+state}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Finite state machine. Chooses the next state for the elevator. 
+
