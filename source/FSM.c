@@ -100,7 +100,6 @@ void fsm_stop(){
         hardware_command_stop_light(0);
         g_current_state = IDLE;
     }
-    
 }
 
 

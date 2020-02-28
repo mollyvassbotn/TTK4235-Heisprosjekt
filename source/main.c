@@ -24,8 +24,6 @@ int main(){
 
     order_delete_all_orders();
     order_init();
-    fsm_init();
-    order_add_order();
     order_get_current_floor();
     g_current_state = INIT;
     fsm_run();
